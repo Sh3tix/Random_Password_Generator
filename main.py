@@ -10,18 +10,20 @@ Date: 12/04/2021
 
 def get_args():
     parser = argparse.ArgumentParser(description="Random password generator")
-    parser.add_argument("-l", "--length", type=int,dest="length", help="Length of the password (max 30)")
+    parser.add_argument("-l", "--length", type=int, dest="length", help="Length of the password (max 30)")
     parser.add_argument("-s", "--specials", action="store_true", help="Add specials characters")
     parser.add_argument("-n", "--numbers", action="store_true", help="Add numbers")
-
-    if type(parser.parse_args().length) is not int:
-        exit("[-] The length of the password must be of type int")
 
     return parser.parse_args()
 
 
 def generate_password(password_len, add_numbers, add_special):
     password = ""
+    if add_special == "y":
+        add_special = True
+
+    if add_numbers == "y":
+        add_numbers = True
 
     # Generate alphabet with chr() function and for loop.
     alphabet_upper = [chr(i) for i in range(65, 91)]
@@ -39,10 +41,10 @@ def generate_password(password_len, add_numbers, add_special):
     for i in range(password_len):
 
         if len(password) < password_len:
-            if add_special == "y":
+            if add_special:
                 password += choice(special)
 
-            if add_numbers == "y":
+            if add_numbers:
                 password += choice(numbers)
 
             password += choice(alphabet)
@@ -76,6 +78,7 @@ def main():
             password_len = int(input("Password length (max 30): "))
 
         except ValueError:
+
             return "-1", "[-] The length of the password must be of type int"
 
         add_numbers = input("Add numbers (y/n): ")
@@ -96,3 +99,4 @@ if "__main__" == __name__:
 
     else:
         print("Your password:", password)
+
