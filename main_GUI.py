@@ -7,6 +7,7 @@ Author: G@b
 Date: 13/04/2021
 """
 
+
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -29,12 +30,12 @@ class Application(tk.Frame):
 
         option_frame = tk.LabelFrame(self.master, text="Options")
         self.scale_length = tk.Scale(option_frame,
-                                orient="horizontal",
-                                length=150,
-                                from_=4,
-                                to=30,
-                                width=12,
-                                label="Length of the password")
+                                     orient="horizontal",
+                                     length=150,
+                                     from_=4,
+                                     to=30,
+                                     width=12,
+                                     label="Length of the password")
 
         add_numbers = tk.Checkbutton(option_frame, text="Add numbers", variable=self.numbers)
         add_specials = tk.Checkbutton(option_frame, text="Add specials characters", variable=self.sepcials)
@@ -67,6 +68,8 @@ class Application(tk.Frame):
         self.password_history.insert(tk.INSERT, password)
         self.password_history.config(state="disabled")
 
-root = tk.Tk()
-app = Application(master=root)
-app.mainloop()
+
+if "__main__" == __name__:
+    root = tk.Tk()
+    app = Application(master=root)
+    app.mainloop()
